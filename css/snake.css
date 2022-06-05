@@ -1,0 +1,139 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url('../img/bg.jpg');
+}
+
+#snakeWindow {
+  --cellSize: 20px;
+  --screenWidth: 20;
+  --screenHeight: 15;
+  --borderRadius: 0.4em;
+  position: relative;
+  width: calc(var(--cellSize) * var(--screenWidth));
+  height: calc(var(--cellSize) * var(--screenHeight));
+  background-color: #195EC8;
+  -webkit-box-shadow: inset 0px 0px 15px -2px rgba(0, 0, 0, 0.51);
+  box-shadow: inset 0px 0px 15px -2px rgba(0, 0, 0, 0.51);
+  border-radius: var(--borderRadius);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60px auto;
+}
+
+.description {
+  margin-top: 40px;
+  text-align: center;
+  position: relative;
+  letter-spacing: .05em;
+  text-shadow:
+    1px 1px mediumturquoise,
+    -1px 1px mediumturquoise,
+    -1px -1px mediumturquoise,
+    1px -1px mediumturquoise;
+  color: white;
+  transition: all 1s;
+}
+  
+.description:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  right: 0;
+  bottom: -15px;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(
+    -45deg,
+    rgba(72, 209, 204, 0) 2px,
+    mediumturquoise 3px,
+    rgba(72, 209, 204, 0) 3px )
+    repeat;
+  background-size: 4px 4px;
+}
+  
+.description:after {
+  content: attr(data-name);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: -2;
+  text-shadow:
+    1px 1px white,
+    2px 2px white,
+    3px 3px white,
+    4px 4px white;
+  color: white;
+  transition: all 1s;
+}
+  
+.description:hover {
+  color: lemonchiffon;
+}
+  
+.description:hover:before {
+  animation: 5s move_lines infinite linear;
+}
+  
+.description:hover:after {
+  color: lemonchiffon;
+  text-shadow:
+    1px 1px lemonchiffon,
+    2px 2px lemonchiffon,
+    3px 3px lemonchiffon,
+    4px 4px lemonchiffon;
+}
+  
+@keyframes move_lines {
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+#snakeWindow>.cell {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--cellSize);
+  height: var(--cellSize);
+}
+
+#snakeWindow>.apple {
+  background-color: rgb(179, 35, 56);
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, 
+  rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  border-radius: var(--borderRadius);
+}
+
+#snakeWindow>.snake {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, 
+  rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  background-color: rgb(255, 255, 255);
+}
+
+#snakeWindow>.text {
+  color: white;
+  text-decoration: underline;
+  font-weight: 800;
+  font-family: Arial, sans-serif;
+  animation-name: textHighlight;
+  animation-duration: 0.7s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes textHighlight {
+  from {
+      font-size: 1.1em;
+  }
+  to {
+      font-size: 1.2em;
+  }
+}
